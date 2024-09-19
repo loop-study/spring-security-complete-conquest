@@ -1,7 +1,29 @@
 # 초기화 과정 이해
 ### 프로젝트 생성 / 의존성 추가
+- 프로젝트 구성
+  - 스프링 부트 3.x 버전
+  - JDK 17
+  - Gradle 빌드
+
+- 의존성
+  - 스프링 시큐리티
+  - 스프링 웹
+
+#### 자동 설정에 의한 기본 보안 작동
+- 서버가 기동되면 자동으로 스프링 시큐리티의 초기화 작업 및 보안 설정이 이뤄진다.
+- 별도의 설정이나 코드가 없어도 기본적인 웹 보안 기능이 현재 시스템에 연동되어 작동됨.
+  1. 기본적인 모든 요청에 인증여부를 검증하고 인증이 승인되어야 자원에 접근이 가능
+  2. 인증 방식은 폼 로그인 방식과 HttpBasic 로그인 방식을 제공
+  3. 인증을 할 수 있는 로그인 페이지가 자동적으로 생성되어 렌더링됨.
+  4. 인증 승인할 수 있게 1개의 계정이 제공됨
+     - SecurityProperties 설정 클래스에서 생성
+     - username : user, password: 랜덤 문자열 
 
 ### SecurityBuilder / SecurityConfigurer
+#### 개념
+- SecurityBuilder는 빌던 클래스로서 웹 보안을 구성하는 빈 객체와 설정 클래스들을 생성하는 역할을 하며 대표적으로 WebSecurity / HttpSecurity가 있다.
+- SecurityConfigurer는 Http 요청과 관련된 보안처리를 담당하는 필터들을 생성하고 여러 초기화 설정에 관여한다
+- SecurityBuilder는 SecurityConfigurer를 참조하고 있으며 인증 및 인가 초기화 작업은 SecurityConfigurer에 의해 진행
 
 ### WebSecurity / HttpSecurity
 #### HttpSecurity
